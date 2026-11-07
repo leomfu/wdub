@@ -10,8 +10,6 @@
 ```bash
 npm test                                   # 51 项行为测试
 npm run test:stream                        # 本地识别服务接口测试
-node tools/build-mobile.mjs safari --out /tmp/wdub-safari
-node tools/build-companion.mjs --out /tmp/wdub-companion
 bash tools/start-whisper.sh --check        # 检查本地识别环境
 ```
 

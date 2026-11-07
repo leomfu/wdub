@@ -8,19 +8,23 @@
 
 | 你想做什么 | 走哪条 | 需要装什么 |
 | --- | --- | --- |
-| 只是用扩展 | [方式一](#方式一只用扩展推荐) | 只要 Chrome，不需要 Node / Python |
+| 只是用扩展 | [方式一](#方式一只用扩展推荐) | 只要 Chrome |
 | 再加本地识别（免费、不上传） | [方式二](#方式二加上本地语音识别可选) | Apple 芯片的 Mac + ffmpeg |
 | 改代码 / 跑测试 / 打包 | [方式三](#方式三开发与构建) | Node ≥ 20 |
-| 手机上用 | [方式四](#方式四手机版本实验性) | 无，但未做真机验收 |
 
 ### 支持平台
 
-| 平台 | 网页视频翻译配音 | 本地语音识别 | 桌面播放器里的本地视频 |
+扩展本身就是普通的 Chrome 扩展，纯 JavaScript，**Chrome 能装的系统都能装**：macOS、Windows、Linux 都是完整功能。
+
+| | 网页视频翻译 / 字幕 / 配音 | 本地视频配音 | 本地语音识别服务 |
 | --- | --- | --- | --- |
-| macOS · Chrome | ✅ 主要验证环境 | ✅ 需要 Apple 芯片 | ✅ |
-| Windows · Chrome | ✅ 可用，未做完整验收 | ❌ | ✅ |
-| Linux · Chrome | ✅ 可用，未做完整验收 | ❌ | ✅ |
-| 手机 Safari / Firefox | ⚠️ 实验性，未做真机验收 | ❌（用 ElevenLabs） | — |
+| macOS | ✅ | ✅ | ✅ 仅 Apple 芯片 |
+| Windows | ✅ | ✅ | ❌ 用云端识别 |
+| Linux | ✅ | ✅ | ❌ 用云端识别 |
+
+唯一的平台差异就是**本地语音识别**：它用 mlx-whisper 走 Apple 的 GPU，只能在 Apple 芯片的 Mac 上跑。其他系统在设置里选 Groq / OpenAI / ElevenLabs / 豆包即可，功能一样，只是要花钱并且会上传音频。
+
+开发和测试目前只在 macOS 的 Chrome 上做过。
 
 ## 开源许可
 
@@ -55,15 +59,9 @@ bash tools/start-whisper.sh --check    # 只检查环境
 ```bash
 npm test          # 51 项行为测试
 npm run test:stream   # 本地识别服务接口测试（Python）
-node tools/build-mobile.mjs safari --out /tmp/wdub-safari    # 手机扩展
-node tools/build-companion.mjs --out /tmp/wdub-companion     # 手机分享播放器
 ```
 
 改完代码后，在 `chrome://extensions` 里点 W 声幕卡片上的刷新按钮，再刷新视频页即可生效。
-
-## 方式四：手机版本（实验性）
-
-`node tools/build-mobile.mjs safari|firefox` 会生成一份手机扩展，`node tools/build-companion.mjs` 会生成一个独立的手机播放器页面。**这两种产物都没有做过真机验收**，手机浏览器对音量、后台播放和自动播放的限制会导致配音表现和桌面不同。
 
 ### 适用范围与限制
 
@@ -176,6 +174,8 @@ bash tools/start-whisper.sh --sensevoice
 
 ## 目录结构
 
+（主要目录，不是全部文件）
+
 ```
 extension/                 可直接加载的扩展（没有构建步骤）
 ├── manifest.json
@@ -203,18 +203,13 @@ extension/                 可直接加载的扩展（没有构建步骤）
 ├── study/                 视频纪要历史
 ├── pages/                 设置页、弹窗、播放器共用的样式和装饰
 ├── terms/                 术语库（含各自的 LICENSE.txt 与来源说明）
-├── mobile/                手机扩展的适配层
 └── icons/
-
-mobile/companion/          手机分享播放器的模板，由 tools/build-companion.mjs 生成完整页面
 
 tools/
 ├── start-whisper.sh       启动本地识别服务（首次自动安装）
 ├── whisper_server.py      Whisper / SenseVoice → OpenAI 兼容接口（带连接口令）
 ├── requirements*.txt      本地服务锁定的依赖版本
 ├── diarize.py             本机说话人分离
-├── build-mobile.mjs       打包手机扩展（safari / firefox）
-├── build-companion.mjs    打包手机分享播放器
 ├── build-term-packs.mjs   从政府开放资料生成术语库
 ├── study-codex-server.mjs 本机 Codex CLI 桥接（实验性）
 └── test-*.mjs|py          行为测试与接口测试
