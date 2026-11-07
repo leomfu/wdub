@@ -1,0 +1,79 @@
+/* 弹窗视觉：夜空、玻璃卡片、冰白主按钮，跟随亮色 / 暗色 */
+body { width: 320px; padding: 14px; position: relative; overflow: hidden; }
+header { margin-bottom: 12px; }
+header .icon { margin-left: auto; border: 0; background: transparent; color: var(--muted); cursor: pointer; border-radius: var(--radius); padding: 6px; line-height: 0; }
+header .icon:hover { background: var(--field); color: var(--text); }
+.wi { width: 18px; height: 18px; }
+
+/* 当前页面的状态 */
+.state { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 8px 10px; font-size: 12.5px; color: var(--muted); }
+.state i { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); flex: none; }
+.state.on { color: var(--text); }
+.state.on i { background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 0 10px var(--accent); }
+.state.busy i { background: var(--accent); animation: blink 1s ease-in-out infinite; }
+.state.err { color: var(--danger); }
+.state.err i { background: var(--danger); }
+@keyframes blink { 50% { opacity: 0.3; } }
+
+/* 主按钮：冰白底深色字（亮色主题下反过来） */
+.big { width: 100%; height: 42px; font-size: 14.5px; letter-spacing: 1px; }
+#toggle.stop { background: var(--field); box-shadow: inset 0 0 0 1.5px var(--line-strong); color: var(--text); }
+.btn.big:disabled { opacity: 0.4; cursor: not-allowed; filter: none; }
+.seg.wmode { display: grid; grid-auto-columns: 1fr; width: 100%; margin-top: 8px; }
+.center { text-align: center; margin: 9px 0 12px; }
+kbd { font: 11px ui-monospace, Menlo, monospace; padding: 1px 5px; border-radius: 4px; background: var(--field); box-shadow: inset 0 0 0 1px var(--line); }
+
+.card { padding: 4px 12px; }
+.field { display: flex; align-items: center; gap: 10px; min-height: 42px; }
+.field + .field { border-top: 1px solid var(--line); }
+.field label { width: 52px; flex: none; color: var(--muted); }
+.field select { flex: 1; min-width: 0; }
+.play { flex: none; width: 30px; height: 30px; border: 0; border-radius: var(--radius); background: var(--field); color: var(--muted); cursor: pointer; font-size: 11px; }
+.play:hover { color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.field .seg { margin-left: auto; flex: 1; grid-auto-columns: 1fr; }
+.grow { flex: 1; font-size: 12px; color: var(--faint); }
+
+/* 多人配音：每个说话人一行（人物名 + 声音 + 删除） */
+.people { padding: 0 0 10px; }
+.people[hidden] { display: none; }
+.detect-toggle { width: 100%; margin: 4px 0 2px; }
+.detect-panel[hidden] { display: none; }
+.person { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+.person input { width: 74px; flex: none; height: 30px; font-size: 12.5px; }
+.person select { flex: 1; min-width: 0; height: 30px; font-size: 12.5px; }
+.person .rm { flex: none; width: 24px; height: 30px; border: 0; background: transparent; color: var(--faint); cursor: pointer; }
+.person .rm:hover { color: var(--danger); }
+.people .add { border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; padding: 4px 0; }
+.people .add:hover { color: var(--text); }
+.note { margin: -4px 0 8px 62px; font-size: 11.5px; color: var(--warn); }
+.note a { cursor: pointer; text-decoration: underline; color: inherit; }
+
+.links { display: flex; justify-content: center; gap: 6px; margin-top: 10px; font-size: 12px; }
+.links a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: var(--radius); color: var(--muted); cursor: pointer; text-decoration: none; }
+.links a:hover { background: var(--field); color: var(--text); }
+.links .wi { width: 15px; height: 15px; }
+.links i { line-height: 0; }
+
+/* 识别人物：按钮 + 人数，进度，识别出的每人一行 */
+.detect-row { display: flex; gap: 6px; margin: 4px 0 2px; }
+.detect { flex: 1; height: 30px; border: 0; border-radius: var(--radius); cursor: pointer; font-size: 12.5px; font-weight: 500;
+  background: color-mix(in srgb, var(--accent) 18%, var(--field)); color: var(--text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent); }
+.detect:hover { box-shadow: inset 0 0 0 1px var(--accent); }
+.detect:disabled { opacity: .6; cursor: progress; }
+.count { flex: none; width: 92px; height: 30px; font-size: 12px; }
+.job { margin: 6px 0; font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+.job:empty { display: none; }
+.job.err { color: var(--danger); }
+.cue-fix { margin: 8px 0; padding: 8px; border-radius: var(--radius); background: var(--field); }
+.cue-fix[hidden] { display: none; }
+.cue-nav, .cue-fields { display: flex; align-items: center; gap: 5px; }
+.cue-nav { margin-bottom: 6px; }
+.cue-text { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.cue-fix button { border: 0; border-radius: var(--radius); padding: 5px 7px; background: var(--glass); color: var(--text); cursor: pointer; font-size: 11px; }
+.cue-fix .apply { background: var(--accent); color: var(--text); }
+.cue-fix select { min-width: 0; flex: 1; font-size: 11px; }
+.cue-note { margin-top: 5px; font-size: 10px; color: var(--muted); }
+.person.found .who { width: 74px; flex: none; display: flex; flex-direction: column; line-height: 1.25; overflow: hidden; }
+.person.found .who b { font-size: 12.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.person.found .who small { font-size: 10.5px; color: var(--faint); white-space: nowrap; }
+.person .play { width: 26px; height: 30px; }

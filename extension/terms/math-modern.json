@@ -1,0 +1,28 @@
+{
+  "id": "math-modern",
+  "parts": [{"source":"WDub 常用数学术语精选","rows":[
+    {"src":"algebra","dst":"代数"},
+    {"src":"geometry","dst":"几何"},
+    {"src":"calculus","dst":"微积分"},
+    {"src":"equation","dst":"方程"},
+    {"src":"inequality","dst":"不等式"},
+    {"src":"variable","dst":"变量"},
+    {"src":"coefficient","dst":"系数"},
+    {"src":"polynomial","dst":"多项式"},
+    {"src":"fraction","dst":"分数"},
+    {"src":"decimal","dst":"小数"},
+    {"src":"exponent","dst":"指数"},
+    {"src":"logarithm","dst":"对数"},
+    {"src":"function","dst":"函数"},
+    {"src":"graph of a function","dst":"函数图像"},
+    {"src":"derivative","dst":"导数"},
+    {"src":"integral","dst":"积分"},
+    {"src":"limit","dst":"极限"},
+    {"src":"probability","dst":"概率"},
+    {"src":"standard deviation","dst":"标准差"},
+    {"src":"hypothesis test","dst":"假设检验"},
+    {"src":"theorem","dst":"定理"},
+    {"src":"proof","dst":"证明"},
+    {"src":"coordinate system","dst":"坐标系"}
+  ]}]
+}

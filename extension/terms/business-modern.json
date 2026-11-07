@@ -1,0 +1,34 @@
+{
+  "id": "business-modern",
+  "parts": [{
+    "source": "WDub 常用商业术语精选",
+    "rows": [
+      {"src":"business model","dst":"商业模式"},
+      {"src":"value proposition","dst":"价值主张"},
+      {"src":"target audience","dst":"目标受众"},
+      {"src":"target market","dst":"目标市场"},
+      {"src":"market research","dst":"市场调研"},
+      {"src":"product market fit","dst":"产品市场契合度"},
+      {"src":"minimum viable product","dst":"最小可行产品"},
+      {"src":"customer acquisition","dst":"获客"},
+      {"src":"customer retention","dst":"客户留存"},
+      {"src":"customer lifetime value","dst":"客户终身价值"},
+      {"src":"conversion rate","dst":"转化率"},
+      {"src":"sales funnel","dst":"销售漏斗"},
+      {"src":"lead generation","dst":"潜在客户获取"},
+      {"src":"brand positioning","dst":"品牌定位"},
+      {"src":"competitive advantage","dst":"竞争优势"},
+      {"src":"revenue stream","dst":"收入来源"},
+      {"src":"gross margin","dst":"毛利率"},
+      {"src":"net profit","dst":"净利润"},
+      {"src":"cash flow","dst":"现金流"},
+      {"src":"unit economics","dst":"单位经济模型"},
+      {"src":"pricing strategy","dst":"定价策略"},
+      {"src":"go to market","dst":"上市推广"},
+      {"src":"growth strategy","dst":"增长策略"},
+      {"src":"return on investment","dst":"投资回报率"},
+      {"src":"break even point","dst":"盈亏平衡点"},
+      {"src":"market share","dst":"市场份额"}
+    ]
+  }]
+}

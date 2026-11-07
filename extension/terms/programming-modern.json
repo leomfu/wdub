@@ -1,0 +1,29 @@
+{
+  "id": "programming-modern",
+  "parts": [{"source":"WDub 常用编程术语精选","rows":[
+    {"src":"source code","dst":"源代码"},
+    {"src":"programming language","dst":"编程语言"},
+    {"src":"integrated development environment","dst":"集成开发环境"},
+    {"src":"code editor","dst":"代码编辑器"},
+    {"src":"version control","dst":"版本控制"},
+    {"src":"repository","dst":"代码仓库"},
+    {"src":"pull request","dst":"拉取请求"},
+    {"src":"code review","dst":"代码审查"},
+    {"src":"unit test","dst":"单元测试"},
+    {"src":"test coverage","dst":"测试覆盖率"},
+    {"src":"debugging","dst":"调试"},
+    {"src":"breakpoint","dst":"断点"},
+    {"src":"stack trace","dst":"调用栈信息"},
+    {"src":"exception handling","dst":"异常处理"},
+    {"src":"application programming interface","dst":"应用程序接口"},
+    {"src":"command line","dst":"命令行"},
+    {"src":"runtime environment","dst":"运行环境"},
+    {"src":"dependency management","dst":"依赖管理"},
+    {"src":"data structure","dst":"数据结构"},
+    {"src":"algorithm","dst":"算法"},
+    {"src":"database query","dst":"数据库查询"},
+    {"src":"frontend","dst":"前端"},
+    {"src":"backend","dst":"后端"},
+    {"src":"deployment","dst":"部署"}
+  ]}]
+}

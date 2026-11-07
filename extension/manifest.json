@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "W 声幕 · WDub",
+  "short_name": "W 声幕",
+  "version": "0.1.0",
+  "description": "给任意网页视频实时翻译、双语字幕和 AI 配音。本地运行，自带免费引擎，也可接入你自己的 Azure / ElevenLabs / OpenAI 兼容服务。",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "W 声幕"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage", "unlimitedStorage", "tts", "offscreen", "contextMenus", "declarativeNetRequestWithHostAccess"],
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "toggle-dubbing": {
+      "suggested_key": { "default": "Alt+D", "mac": "Alt+D" },
+      "description": "开启 / 关闭配音"
+    },
+    "cycle-subtitle-mode": {
+      "suggested_key": { "default": "Alt+C", "mac": "Alt+C" },
+      "description": "切换字幕：双语 → 仅译文 → 关闭"
+    },
+    "translate-subtitles": {
+      "suggested_key": { "default": "Alt+T", "mac": "Alt+T" },
+      "description": "只翻译字幕（不配音）"
+    },
+    "swap-volume": {
+      "suggested_key": { "default": "Alt+S", "mac": "Alt+S" },
+      "description": "在原声与配音之间切换"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/hook.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["*://translate.google.com/*", "*://*.translate.goog/*"],
+      "js": [
+        "shared/defaults.js",
+        "shared/subtitles.js",
+        "shared/study.js",
+        "shared/cast-editor.js",
+        "content/overlay.js",
+        "content/engine.js",
+        "content/ui.js",
+        "content/study-panel.js",
+        "content/controls.js",
+        "content/youtube.js",
+        "content/main.js"
+      ],
+      "css": ["content/content.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

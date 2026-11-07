@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>W 声幕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&family=ZCOOL+KuaiLe&display=swap" />
+    <link rel="stylesheet" href="../pages/base.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="brand">
+      <img class="logo" src="../icons/logo.svg" alt="" />
+      <div><b>W 声幕</b><br /><small>视频实时翻译 · AI 配音</small></div>
+      <button class="icon" id="openOptions" title="全部设置"></button>
+    </header>
+
+    <p class="state glass" id="state"><i></i><span>正在读取当前页面…</span></p>
+    <button class="btn primary big" id="toggle">开始</button>
+    <div class="seg wmode" data-k="wMode"><button data-v="dub">配音 + 字幕</button><button data-v="subtitle">只翻字幕</button></div>
+    <p class="hint center">快捷键 <kbd>Alt</kbd>+<kbd>D</kbd> 配音 · <kbd>Alt</kbd>+<kbd>T</kbd> 只翻字幕</p>
+
+    <section class="card glass lights">
+      <div class="field"><label>翻译成</label><select data-k="targetLang"></select></div>
+      <div class="field"><label>翻译</label>
+        <select data-k="translator"><option value="google">Google 翻译 · 免费</option><option value="llm">AI 大模型 · 更准</option></select></div>
+      <p class="note" id="noteTr" hidden></p>
+      <div class="field"><label>声音</label>
+        <select data-k="tts.engine"><option value="system">系统声音 · 免费</option><option value="azure">Azure 神经语音</option><option value="elevenlabs">ElevenLabs</option></select></div>
+      <p class="note" id="noteTts" hidden></p>
+      <div id="cast"></div>
+      <div class="field"><label>字幕</label>
+        <div class="seg" data-k="subtitle.mode"><button data-v="bilingual">双语</button><button data-v="translated">仅中文</button><button data-v="off">关闭</button></div></div>
+      <div class="field"><label>原声</label>
+        <div class="seg" data-k="audio.originalMode"><button data-v="duck">保留原声</button><button data-v="mute">静音原声</button></div></div>
+    </section>
+
+    <nav class="links">
+      <a id="openPlayer"><i data-icon="film"></i>本地视频</a>
+      <a id="openStudy"><i data-icon="summary"></i>纪要历史</a>
+      <a id="openOptions2"><i data-icon="settings"></i>全部设置</a>
+    </nav>
+
+    <script src="../shared/defaults.js"></script>
+    <script src="../shared/cast-editor.js"></script>
+    <script src="popup.js"></script>
+      <script src="../pages/snow.js"></script>
+  </body>
+</html>

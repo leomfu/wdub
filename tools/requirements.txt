@@ -1,0 +1,4 @@
+# 本地识别服务的基础依赖（macOS · Apple 芯片）
+# 版本是实际验证过的组合；升级前请先跑 `bash tools/start-whisper.sh --check`。
+mlx-whisper==0.4.3
+yt-dlp[default]==2026.10.26

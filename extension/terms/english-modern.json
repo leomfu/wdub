@@ -1,0 +1,28 @@
+{
+  "id": "english-modern",
+  "parts": [{"source":"WDub 常用英语学习术语精选","rows":[
+    {"src":"pronunciation","dst":"发音"},
+    {"src":"vocabulary","dst":"词汇"},
+    {"src":"listening comprehension","dst":"听力理解"},
+    {"src":"reading comprehension","dst":"阅读理解"},
+    {"src":"speaking practice","dst":"口语练习"},
+    {"src":"writing practice","dst":"写作练习"},
+    {"src":"fluency","dst":"表达流利度"},
+    {"src":"grammar","dst":"语法"},
+    {"src":"sentence structure","dst":"句子结构"},
+    {"src":"verb tense","dst":"动词时态"},
+    {"src":"present tense","dst":"现在时"},
+    {"src":"past tense","dst":"过去时"},
+    {"src":"future tense","dst":"将来时"},
+    {"src":"present continuous","dst":"现在进行时"},
+    {"src":"subject verb agreement","dst":"主谓一致"},
+    {"src":"phrasal verb","dst":"短语动词"},
+    {"src":"idiom","dst":"习语"},
+    {"src":"collocation","dst":"词语搭配"},
+    {"src":"stress pattern","dst":"重音模式"},
+    {"src":"intonation","dst":"语调"},
+    {"src":"minimal pair","dst":"最小对立体"},
+    {"src":"native speaker","dst":"母语者"},
+    {"src":"language learning","dst":"语言学习"}
+  ]}]
+}

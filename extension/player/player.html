@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>W 声幕 · 本地视频</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&family=ZCOOL+KuaiLe&display=swap" />
+    <link rel="stylesheet" href="../pages/base.css" />
+    <link rel="stylesheet" href="../content/content.css" />
+    <link rel="stylesheet" href="player.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand"><img class="logo" src="../icons/logo.svg" alt="" /><div><b>W 声幕</b><br /><small>本地视频配音</small></div></div>
+      <div class="actions">
+        <button class="btn" id="pickVideo">选择视频</button>
+        <button class="btn" id="pickSub">选择字幕</button>
+        <button class="btn" id="options">设置</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="stage" id="stage">
+        <div class="drop" id="drop">
+          <img src="../icons/logo.svg" alt="" />
+          <h2>把视频和字幕文件拖到这里</h2>
+          <p class="hint">支持 MP4 / WebM / MOV（H.264）+ SRT / VTT。文件只在本机读取，不会上传。</p>
+        </div>
+        <video id="video" controls hidden></video>
+      </div>
+
+      <aside class="side lights">
+        <div class="item"><span class="hint">视频</span><b id="videoName">未选择</b></div>
+        <div class="item"><span class="hint">字幕</span><b id="subName">未选择</b></div>
+        <button class="btn" id="recognize" hidden>✦ AI 识别字幕</button>
+        <div class="mains">
+          <button class="btn primary big" id="toggle" disabled>开始配音</button>
+          <button class="btn big" id="toggleSub" disabled>只翻字幕</button>
+        </div>
+        <p class="hint" id="status">先选择视频和字幕。</p>
+        <div class="bar"><i id="bar"></i></div>
+        <div class="row"><span class="hint">字幕</span>
+          <div class="seg" id="mode"><button data-v="bilingual">双语</button><button data-v="translated">仅译文</button><button data-v="off">关闭</button></div></div>
+        <button class="btn" id="export" disabled>导出译文 SRT</button>
+        <button class="btn" id="exportAsr" hidden>导出识别原文 SRT</button>
+        <p class="hint small" id="asrHint">没有字幕？点「AI 识别字幕」，用设置里选的识别引擎生成（默认本地 mlx-whisper）。</p>
+      </aside>
+    </main>
+
+    <input type="file" id="videoFile" accept="video/*,.mkv" hidden />
+    <input type="file" id="subFile" accept=".srt,.vtt,.txt" hidden />
+
+    <script src="../shared/defaults.js"></script>
+    <script src="../shared/subtitles.js"></script>
+    <script src="../shared/asr.js"></script>
+    <script src="../content/overlay.js"></script>
+    <script src="../content/engine.js"></script>
+    <script src="../content/ui.js"></script>
+    <script src="../content/main.js"></script>
+    <script src="player.js"></script>
+      <script src="../pages/snow.js"></script>
+  </body>
+</html>

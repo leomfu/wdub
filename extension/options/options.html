@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>W 声幕 · 设置</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&family=ZCOOL+KuaiLe&display=swap" />
+    <link rel="stylesheet" href="../pages/base.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <aside>
+      <div class="brand"><img class="logo" src="../icons/logo.svg" alt="" /><div><b>W 声幕</b><br /><small>v0.1 · 本地版</small></div></div>
+      <nav>
+        <a href="#start" class="on">开始使用</a>
+        <a href="#accounts">账号与 Key</a>
+        <a href="#translate">翻译</a>
+        <a href="#voice">语音与角色</a>
+        <a href="#asr">语音识别</a>
+        <a href="#view">字幕外观与音量</a>
+        <a href="#rules">术语与规则</a>
+        <a href="#sites">按钮与站点</a>
+      </nav>
+      <div class="saved" id="saved">已自动保存</div>
+    </aside>
+
+    <main>
+      <!-- 开始使用 -->
+      <section id="start">
+        <h1>开始使用</h1>
+        <p class="lead">点播放栏里的 <b>W</b> 开始，旁边的滑杆按钮打开快捷设置。先选一套方案，之后每一项都还能单独改。</p>
+        <div class="plans" id="plans"></div>
+      </section>
+
+      <!-- 账号与 Key -->
+      <section id="accounts">
+        <h1>账号与 Key</h1>
+        <p class="lead">key 是服务商发给你的一串密码，扩展用它替你调用翻译、配音和识别。每家只填一次，各处共用；只保存在这台电脑上。</p>
+        <h2>正在使用</h2>
+        <div class="cards" id="cardsUsed"></div>
+        <details class="more" id="moreProviders">
+          <summary>更多服务商</summary>
+          <div class="cards" id="cardsMore"></div>
+        </details>
+        <h2>本地服务 <span class="hint">装在你自己电脑上，免费、不联网</span></h2>
+        <div class="cards" id="cardsLocal"></div>
+      </section>
+
+      <!-- 翻译 -->
+      <section id="translate">
+        <h1>翻译</h1>
+        <div class="row"><label>翻译引擎</label>
+          <div class="seg" data-k="translator"><button data-v="google">Google 翻译 · 免费</button><button data-v="llm">AI 大模型</button></div></div>
+        <div data-show="translator=llm">
+          <div class="row"><label>服务商</label><select data-k="llm.provider" data-fill="LLM_PROVIDERS"></select></div>
+          <div class="row"><label>模型</label><div class="model" data-path="llm.model" data-models="llm" data-by="llm.provider"></div></div>
+          <p class="need" data-need="llm"></p>
+          <p class="hint indent" id="ollamaHint" hidden></p>
+          <div class="row" data-show="llm.provider=ollama"><label>云端备用</label><span class="switch"><input type="checkbox" data-k="llm.allowCloudFallback" /><span></span></span><span class="hint">本地模型失败时是否改发 Google 翻译。默认关闭，字幕不会离开这台电脑。</span></div>
+          <p class="hint indent" id="mtHint" hidden>这是翻译专用模型：逐句直译，又快又准，但不会自动判断说话人，也做不了视频总结。</p>
+        </div>
+        <div class="row"><label>源语言</label><select data-k="sourceLang" class="langs"></select></div>
+        <div class="row"><label>目标语言</label><select data-k="targetLang" class="langs no-auto"></select></div>
+        <div class="row" data-show="translator=llm"><label></label><button class="btn" id="testLlm">测试翻译</button><span class="hint" id="llmResult"></span></div>
+        <details class="adv">
+          <summary>高级</summary>
+          <div class="row"><label>同语言跳过</label><span class="switch"><input type="checkbox" data-k="skipSameLanguage" /><span></span></span><span class="hint">视频本来就是目标语言时不翻译。</span></div>
+          <div class="row"><label>每批句数</label><input type="number" min="5" max="100" data-k="llm.batchSize" /><span class="hint">AI 翻译每次发送多少句。</span></div>
+          <div class="row"><label>识别说话人</label><span class="switch"><input type="checkbox" data-k="llm.detectSpeakers" /><span></span></span><span class="hint">AI 顺便判断谁在说话、男声还是女声，用于多角色配音。</span></div>
+          <div class="row"><label>领域提示</label><input type="text" data-k="llm.domainHint" placeholder="可选，例如：编程教程 / 游戏实况 / 医学讲座" /></div>
+        </details>
+      </section>
+
+      <!-- 语音 -->
+      <section id="voice">
+        <h1>语音与角色</h1>
+        <div class="row top"><label>语音引擎</label><div class="seg wrap" data-k="tts.engine" data-fill="TTS_ENGINES"></div></div>
+        <div class="row" data-show="tts.engine=elevenlabs"><label>模型</label><div class="model" data-models="tts" data-by="tts.engine"></div></div>
+        <p class="need" data-need="tts"></p>
+        <p class="hint indent" data-show="tts.engine=system">浏览器和系统自带的声音，免费，不用填任何东西。</p>
+
+        <h2>角色声音</h2>
+        <div class="row"><label>多角色配音</label><span class="switch"><input type="checkbox" data-k="multiVoice" /><span></span></span>
+          <span class="hint">不同说话人用不同声音。</span></div>
+        <div class="row"><label>识别人物用</label>
+          <div class="seg" data-k="diarize.engine"><button data-v="local">本地 · 免费</button><button data-v="elevenlabs">ElevenLabs · 更准</button></div></div>
+        <p class="hint indent">在弹窗或视频上的面板里点「识别人物」，会听声音分出每句是谁说的，并按男女分好声音。两种都需要先开启本地识别服务（用它下载视频的音频），见 <a href="#accounts" data-goto="asr">账号与 Key → 本地服务</a>；选 ElevenLabs 还要填它的 key。</p>
+        <div class="row"><label>主声音</label><select id="narrator"></select></div>
+        <div class="row top"><label>男声池</label><div class="chips" id="male"></div></div>
+        <div class="row top"><label>女声池</label><div class="chips" id="female"></div></div>
+        <div class="row"><label>试听</label><input type="text" id="testText" value="你好，这是 W 声幕的配音试听。今天我们来聊聊人工智能。" />
+          <button class="btn" id="testVoice">▶ 试听主声音</button></div>
+        <p class="hint indent" id="testResult"></p>
+
+        <details class="adv">
+          <summary>高级</summary>
+          <div class="row" data-show="tts.engine=azure"><label>情感风格</label>
+            <select data-k="tts.azure.style">
+              <option value="">默认</option><option value="chat">聊天</option><option value="narration-relaxed">轻松叙述</option>
+              <option value="newscast">新闻播报</option><option value="cheerful">愉快</option><option value="calm">平静</option><option value="documentary-narration">纪录片</option>
+            </select></div>
+          <div class="row"><label>最高加速</label><input type="range" min="1" max="2.5" step="0.1" data-k="tts.maxSpeed" /><span class="val" data-for="tts.maxSpeed" data-fmt="x"></span></div>
+          <p class="hint indent">配音放不下时先加速（音调不变），超过这个倍数才放慢画面。</p>
+        </details>
+      </section>
+
+      <!-- 语音识别 -->
+      <section id="asr">
+        <h1>语音识别</h1>
+        <p class="lead">视频没有字幕时，用 AI 听写生成。外语视频用本地 Whisper，中文视频用本地 SenseVoice，多人访谈想区分说话人用 ElevenLabs。</p>
+        <div class="row top"><label>识别引擎</label><div class="seg wrap" data-k="asr.engine" data-fill="ASR_ENGINES"></div></div>
+        <p class="need" data-need="asr"></p>
+        <p class="hint indent" data-show="asr.engine=local,sensevoice">需要先开启本地识别服务，见 <a href="#accounts" data-goto="asr">账号与 Key → 本地服务</a>。</p>
+        <div class="row" data-show="asr.engine=local,sensevoice"><label>连接口令</label><input type="password" data-k="asr.local.token" placeholder="启动窗口里打印的那串字符" autocomplete="off" /><span class="hint">识别服务启动时会打印「连接口令」，填在这里；不填服务会拒绝请求。</span></div>
+        <div class="row"><label>视频语言</label>
+          <select data-k="asr.language">
+            <option value="en">英语</option><option value="auto">自动检测</option><option value="zh">中文</option><option value="ja">日语</option>
+            <option value="ko">韩语</option><option value="fr">法语</option><option value="de">德语</option><option value="es">西班牙语</option>
+          </select></div>
+        <div class="row"><label>自动识别</label><span class="switch"><input type="checkbox" data-k="asr.autoOnMissing" /><span></span></span><span class="hint">网页视频没有字幕时自动识别</span></div>
+        <div class="row"><label></label><button class="btn" id="testAsr">测试识别引擎</button><span class="hint" id="asrResult"></span></div>
+        <details class="adv">
+          <summary>高级</summary>
+          <div class="row"><label>最多说话人</label><input type="number" min="1" max="10" data-k="asr.maxSpeakers" /><span class="hint">用 ElevenLabs 识别多人对话时用。</span></div>
+        </details>
+      </section>
+
+      <!-- 字幕与音量 -->
+      <section id="view">
+        <h1>字幕外观</h1>
+        <p class="lead">先选一个接近你想要的样子，再改颜色和细节。这里的改动会自动保存到视频字幕。</p>
+        <div class="preview" id="preview">
+          <div class="pv-head"><b>实时预览</b><button class="btn small" id="previewTone" type="button" aria-pressed="false">换成浅色画面</button></div>
+          <div class="pv-video" data-tone="dark"><div class="pv-scene" aria-hidden="true"><span>学习视频 · 画面示例</span><i></i></div>
+            <div class="pv-card"><div class="pv-tr">把一句话讲清楚，理解才会跟上。</div><div class="pv-or">A clear sentence makes the idea easier to follow.</div></div>
+          </div>
+        </div>
+        <h2>先选一种样式 <span class="hint">选择后仍可修改每个细节</span></h2>
+        <div class="subtitle-presets" id="subtitlePresets"></div>
+        <h2>按你的喜好微调 <span class="hint" id="subtitleStyleName">当前样式：自定义</span></h2>
+        <div class="row"><label>显示内容</label><div class="seg" data-k="subtitle.mode"><button data-v="bilingual">双语</button><button data-v="translated">仅译文</button><button data-v="off">关闭</button></div></div>
+        <div class="subtitle-color-grid">
+          <label class="color-field"><span>中文译文颜色</span><span><input type="color" data-k="subtitle.translatedColor" aria-label="选择中文译文颜色" /><input type="text" data-hex-for="subtitle.translatedColor" aria-label="输入中文译文色号" maxlength="7" spellcheck="false" /></span></label>
+          <label class="color-field"><span>原文颜色</span><span><input type="color" data-k="subtitle.originalColor" aria-label="选择原文颜色" /><input type="text" data-hex-for="subtitle.originalColor" aria-label="输入原文色号" maxlength="7" spellcheck="false" /></span></label>
+        </div>
+        <div class="row"><label>文字大小</label><input type="range" min="14" max="44" step="1" data-k="subtitle.fontSize" /><span class="val" data-for="subtitle.fontSize" data-fmt="px"></span></div>
+        <div class="row"><label>字幕位置</label><div class="seg" data-k="subtitle.position"><button data-v="bottom">底部</button><button data-v="top">顶部</button></div></div>
+        <div class="row"><label>文字边缘</label><div class="seg" data-k="subtitle.edge"><button data-v="shadow">柔和阴影</button><button data-v="outline">清晰描边</button><button data-v="none">无</button></div></div>
+        <div class="row" data-show="subtitle.edge=shadow,outline"><label>边缘颜色</label><input type="color" data-k="subtitle.edgeColor" aria-label="选择字幕边缘颜色" /><input type="text" data-hex-for="subtitle.edgeColor" aria-label="输入字幕边缘色号" maxlength="7" spellcheck="false" /></div>
+        <div class="row"><label>背景深浅</label><input type="range" min="0" max="1" step="0.05" data-k="subtitle.bgOpacity" /><span class="val" data-for="subtitle.bgOpacity" data-fmt="pct"></span></div>
+        <div class="row"><label>隐藏原字幕</label><span class="switch"><input type="checkbox" data-k="subtitle.hideNative" /><span></span></span></div>
+
+        <details class="adv subtitle-advanced">
+          <summary>更多字幕细节</summary>
+          <div class="row"><label>双语顺序</label><div class="seg" data-k="subtitle.order"><button data-v="translatedFirst">译文在上</button><button data-v="originalFirst">原文在上</button></div></div>
+          <div class="row"><label>离边缘距离</label><input type="range" min="0" max="40" step="1" data-k="subtitle.offset" /><span class="val" data-for="subtitle.offset" data-fmt="%"></span></div>
+          <div class="row"><label>原文字号比例</label><input type="range" min="0.5" max="1" step="0.02" data-k="subtitle.originalScale" /><span class="val" data-for="subtitle.originalScale" data-fmt="pct"></span></div>
+          <div class="row"><label>原文单独底色</label><input type="range" min="0" max="1" step="0.05" data-k="subtitle.originalBg" /><span class="val" data-for="subtitle.originalBg" data-fmt="pct"></span></div>
+          <div class="row"><label>字体</label><input type="text" data-k="subtitle.fontFamily" placeholder="留空使用系统字体，例如 PingFang SC" /></div>
+        </details>
+
+        <h2>音量</h2>
+        <div class="row"><label>原声</label><div class="seg" data-k="audio.originalMode"><button data-v="duck">保留原声</button><button data-v="mute">静音原声</button></div></div>
+        <div class="row"><label>配音音量</label><input type="range" min="0" max="1" step="0.05" data-k="audio.dubVolume" /><span class="val" data-for="audio.dubVolume" data-fmt="pct"></span></div>
+        <div class="row" data-show="audio.originalMode=duck"><label>说话时原声</label><input type="range" min="0" max="1" step="0.05" data-k="audio.originalVolume" /><span class="val" data-for="audio.originalVolume" data-fmt="pct"></span></div>
+
+        <details class="adv">
+          <summary>更多音量选项</summary>
+          <div class="row"><label>智能闪避</label><span class="switch"><input type="checkbox" data-k="audio.smartDuck" /><span></span></span><span class="hint">只在配音说话时压低原声。</span></div>
+          <div class="row"><label>句间原声</label><input type="range" min="0" max="1" step="0.05" data-k="audio.idleVolume" /><span class="val" data-for="audio.idleVolume" data-fmt="pct"></span></div>
+          <div class="row"><label>画面等配音</label><span class="switch"><input type="checkbox" data-k="audio.slowVideoWhenLagging" /><span></span></span><span class="hint">配音还没念完时放慢画面。</span></div>
+          <div class="row"><label>最慢画面</label><input type="range" min="0.5" max="1" step="0.05" data-k="audio.minVideoRate" /><span class="val" data-for="audio.minVideoRate" data-fmt="x"></span></div>
+        </details>
+      </section>
+
+      <!-- 规则 -->
+      <section id="rules">
+        <h1>术语与规则</h1>
+        <p class="hint">先把视频字幕整理成完整句子，再按视频主题选择词表。词表只给 AI 翻译提供专有词参考，不会替代整句翻译；播放页的 W 浮窗也能直接调整。</p>
+        <div class="row"><label>启用规则</label><span class="switch"><input type="checkbox" data-k="rules.enabled" /><span></span></span></div>
+        <div class="row"><label>选择方式</label><div class="seg" data-k="rules.packMode"><button data-v="auto">按视频自动</button><button data-v="manual">手动固定</button></div></div>
+        <div id="term-packs"></div>
+        <div class="rule-block" data-rule="glossary" data-a="src" data-b="dst" data-pa="原文术语，如 Stratagem" data-pb="指定译法，如 战备">
+          <h2>术语库 <span class="hint">自己的译法优先于专业词库</span></h2></div>
+        <div class="rule-block" data-rule="preReplace" data-a="find" data-b="repl" data-pa="原文错词，如 cloud code" data-pb="替换为，如 Claude Code">
+          <h2>原文纠错 <span class="hint">翻译前修正字幕识别错误</span></h2></div>
+        <div class="rule-block" data-rule="postReplace" data-a="find" data-b="repl" data-pa="译文中的词" data-pb="希望显示的词">
+          <h2>译文替换 <span class="hint">翻译后替换，字幕和配音都生效</span></h2></div>
+        <div class="rule-block" data-rule="pronunciation" data-a="find" data-b="say" data-pa="文字，如 Claude" data-pb="读作，如 克劳德">
+          <h2>发音纠正 <span class="hint">只改配音读法，不改字幕</span></h2></div>
+      </section>
+
+      <!-- 站点与数据 -->
+      <section id="sites">
+        <h1>按钮与站点</h1>
+        <div class="row"><label>外观</label>
+          <div class="seg" data-k="theme"><button data-v="auto">跟随系统</button><button data-v="light">亮色</button><button data-v="dark">暗色</button></div></div>
+        <div class="row"><label>背景装饰</label><span class="switch"><input type="checkbox" data-k="snow" /><span></span></span></div>
+        <div class="row"><label>点 W 时</label>
+          <div class="seg" data-k="wMode"><button data-v="dub">配音 + 中文字幕</button><button data-v="subtitle">只翻字幕（不配音）</button></div></div>
+        <div class="row"><label>YouTube 按钮</label><span class="switch"><input type="checkbox" data-k="youtubeButton" /><span></span></span></div>
+        <div class="row"><label>播放栏按钮</label><span class="switch"><input type="checkbox" data-k="controlBar" /><span></span></span>
+          <span class="hint">YouTube 以外的网站</span></div>
+        <div class="row"><label>显示悬浮球</label><span class="switch"><input type="checkbox" data-k="floatingBall" /><span></span></span></div>
+
+        <h2>快捷键</h2>
+        <div class="shortcuts" id="shortcuts"></div>
+        <div class="row"><button class="btn" id="editShortcuts">修改快捷键</button></div>
+
+        <h2>不显示 W 按钮的网站</h2>
+        <div class="row"><input type="text" id="siteInput" placeholder="输入域名，例如 bilibili.com" /><button class="btn" id="siteAdd">添加</button></div>
+        <ul class="sites" id="sites-list"></ul>
+
+
+        <h2>备份与迁移</h2>
+        <p class="hint" id="syncState"></p>
+        <div class="engine-box backup">
+          <div class="row wrap">
+            <button class="btn" id="exportCfg">导出备份</button>
+            <label class="check"><input type="checkbox" id="withKeys" /> 包含 key</label>
+            <input type="password" id="exportPw" placeholder="设一个密码，导入时要用" hidden />
+          </div>
+          <div class="row wrap">
+            <button class="btn" id="importCfg">导入备份</button>
+            <span class="unlock" id="unlock" hidden>
+              <input type="password" id="importPw" placeholder="输入导出时设的密码" />
+              <button class="btn" id="unlockOk">解锁并导入</button>
+              <button class="btn" id="unlockSkip">只导入设置</button>
+            </span>
+          </div>
+          <input type="file" id="cfgFile" accept=".json" hidden />
+          <p class="hint" id="dataResult">导出的文件默认不含 key；勾选「包含 key」时，key 会用你设的密码加密。</p>
+        </div>
+        <div class="row wrap">
+          <button class="btn danger" id="clearCache">清空翻译缓存</button>
+          <button class="btn danger" id="clearAsr">清空识别与校对</button>
+          <button class="btn danger" id="clearPeople">清空人物绑定</button>
+          <button class="btn danger" id="clearStudy">清空视频纪要</button>
+          <button class="btn danger" id="clearAll">清空全部本机数据</button>
+          <button class="btn danger" id="resetCfg">恢复默认设置</button>
+        </div>
+        <p class="hint">「清空全部本机数据」会连同设置和 key 一起删除，无法恢复。清理后已打开的视频页会重新翻译。</p>
+      </section>
+
+      <footer class="pager"><button class="btn" id="prevSec"></button><button class="btn primary" id="nextSec"></button></footer>
+    </main>
+    <script src="../shared/defaults.js"></script>
+    <script src="../shared/subtitles.js"></script>
+    <script src="../shared/asr.js"></script>
+    <script src="options.js"></script>
+    <script src="../pages/snow.js"></script>
+  </body>
+</html>

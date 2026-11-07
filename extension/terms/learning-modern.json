@@ -1,0 +1,31 @@
+{
+  "id": "learning-modern",
+  "parts": [{
+    "source": "WDub 常用学习方法术语精选",
+    "rows": [
+      {"src":"active recall","dst":"主动回忆"},
+      {"src":"spaced repetition","dst":"间隔重复"},
+      {"src":"deliberate practice","dst":"刻意练习"},
+      {"src":"retrieval practice","dst":"提取练习"},
+      {"src":"interleaved practice","dst":"交错练习"},
+      {"src":"learning curve","dst":"学习曲线"},
+      {"src":"cognitive load","dst":"认知负荷"},
+      {"src":"working memory","dst":"工作记忆"},
+      {"src":"long term memory","dst":"长期记忆"},
+      {"src":"metacognition","dst":"元认知"},
+      {"src":"feedback loop","dst":"反馈循环"},
+      {"src":"learning objective","dst":"学习目标"},
+      {"src":"study plan","dst":"学习计划"},
+      {"src":"study habit","dst":"学习习惯"},
+      {"src":"note taking","dst":"记笔记"},
+      {"src":"critical thinking","dst":"批判性思维"},
+      {"src":"problem solving","dst":"解决问题"},
+      {"src":"self assessment","dst":"自我评估"},
+      {"src":"exam preparation","dst":"备考"},
+      {"src":"practice test","dst":"模拟测试"},
+      {"src":"course material","dst":"课程资料"},
+      {"src":"learning strategy","dst":"学习策略"},
+      {"src":"language acquisition","dst":"语言习得"}
+    ]
+  }]
+}

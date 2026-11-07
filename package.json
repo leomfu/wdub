@@ -1,0 +1,16 @@
+{
+  "name": "wdub",
+  "private": true,
+  "author": "leomfu",
+  "license": "MPL-2.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tools/test-regressions.mjs && node tools/test-dub-sync.mjs && node tools/test-study.mjs && node tools/test-study-history.mjs && node tools/test-voice-selection.mjs && node tools/test-translation-timing.mjs && node tools/test-translation-cache.mjs",
+    "test:stream": "PYTHONDONTWRITEBYTECODE=1 python3 tools/test-stream-endpoint.py"
+  },
+  "devDependencies": {
+    "opencc-js": "^1.4.2"
+  }
+}

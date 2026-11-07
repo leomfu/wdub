@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#142139">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>W 声幕 · 手机播放器</title>
+</head>
+<body>
+  <header><img src="assets/logo.svg" alt=""><div><b>W 声幕</b><small>手机视频翻译与配音</small></div></header>
+  <main>
+    <section class="card intro">
+      <h1>把视频带进来</h1>
+      <p>视频文件会留在手机上；只有点“识别字幕”时才会发送给 ElevenLabs。分享网页链接后，在装有 W 声幕扩展的浏览器中观看。</p>
+      <label class="button primary">选择视频<input id="videoFile" type="file" accept="video/*,.mov,.mkv" hidden></label>
+      <label class="button">导入 SRT / VTT<input id="subtitleFile" type="file" accept=".srt,.vtt,.txt" hidden></label>
+      <div class="link-row"><input id="sharedUrl" type="url" placeholder="粘贴 YouTube 或普通网页链接"><button id="openUrl">在浏览器中打开</button></div>
+      <p id="linkHint" class="hint" hidden></p>
+    </section>
+
+    <section class="card player-card">
+      <video id="video" controls playsinline></video>
+      <p id="fileName" class="hint">还没有选择视频</p>
+      <div class="controls"><button id="recognize">识别字幕</button><button id="start" class="primary">开始字幕＋配音</button><button id="stop">停止</button></div>
+      <p id="status" role="status">先选择视频和字幕，或识别字幕。</p>
+    </section>
+
+    <section class="card settings">
+      <h2>配音设置</h2>
+      <label>语音服务<select id="voiceEngine"><option value="azure">Azure</option><option value="elevenlabs">ElevenLabs</option></select></label>
+      <label>Azure Key<input id="azureKey" type="password" autocomplete="off" placeholder="Azure 语音密钥"></label>
+      <label>Azure 区域<input id="azureRegion" type="text" autocapitalize="off" placeholder="eastasia"></label>
+      <label>ElevenLabs Key<input id="elevenKey" type="password" autocomplete="off" placeholder="配音与识别共用"></label>
+      <label>配音声音<input id="voiceId" type="text" autocapitalize="off" placeholder="声音 ID；Azure 可留空"></label>
+      <label>原声<select id="originalMode"><option value="duck">配音时压低</option><option value="mute">静音</option></select></label>
+      <label>配音音量<input id="dubVolume" type="range" min="0" max="1" step="0.05"></label>
+      <p class="hint">iPhone 浏览器若不能调低视频音量，配音说话时会临时静音原声。接口密钥只存于当前浏览器的本地存储。</p>
+    </section>
+  </main>
+
+  <dialog id="review"><h2>先检查识别字幕</h2><p class="hint">修改错字；清空一行可删除。确认后才开始翻译和配音。</p><div id="reviewRows"></div><footer><button id="reviewPrev">上一页</button><span id="reviewPage"></span><button id="reviewNext">下一页</button><button id="reviewCancel">取消</button><button id="reviewConfirm" class="primary">确认字幕</button></footer></dialog>
+
+  <script src="scripts/flag.js"></script>
+  <script src="scripts/defaults.js"></script>
+  <script src="scripts/subtitles.js"></script>
+  <script src="scripts/overlay.js"></script>
+  <script src="scripts/engine.js"></script>
+  <script src="scripts/cloud.js"></script>
+  <script src="scripts/audio.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

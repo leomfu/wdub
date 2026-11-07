@@ -1,0 +1,28 @@
+{
+  "id": "physics-modern",
+  "parts": [{"source":"WDub 常用物理术语精选","rows":[
+    {"src":"velocity","dst":"速度"},
+    {"src":"acceleration","dst":"加速度"},
+    {"src":"displacement","dst":"位移"},
+    {"src":"momentum","dst":"动量"},
+    {"src":"kinetic energy","dst":"动能"},
+    {"src":"potential energy","dst":"势能"},
+    {"src":"conservation of energy","dst":"能量守恒"},
+    {"src":"gravitational force","dst":"万有引力"},
+    {"src":"electric field","dst":"电场"},
+    {"src":"magnetic field","dst":"磁场"},
+    {"src":"electric current","dst":"电流"},
+    {"src":"voltage","dst":"电压"},
+    {"src":"resistance","dst":"电阻"},
+    {"src":"frequency","dst":"频率"},
+    {"src":"wavelength","dst":"波长"},
+    {"src":"wave interference","dst":"波的干涉"},
+    {"src":"thermodynamics","dst":"热力学"},
+    {"src":"temperature","dst":"温度"},
+    {"src":"pressure","dst":"压强"},
+    {"src":"quantum mechanics","dst":"量子力学"},
+    {"src":"special relativity","dst":"狭义相对论"},
+    {"src":"newton second law","dst":"牛顿第二定律"},
+    {"src":"free body diagram","dst":"受力图"}
+  ]}]
+}

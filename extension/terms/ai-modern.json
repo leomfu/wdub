@@ -1,0 +1,36 @@
+{
+  "id": "ai-modern",
+  "parts": [{
+    "source": "WDub 常用 AI 术语精选",
+    "rows": [
+      {"src":"artificial intelligence","dst":"人工智能"},
+      {"src":"generative AI","dst":"生成式 AI"},
+      {"src":"large language model","dst":"大语言模型"},
+      {"src":"language model","dst":"语言模型"},
+      {"src":"machine learning","dst":"机器学习"},
+      {"src":"deep learning","dst":"深度学习"},
+      {"src":"neural network","dst":"神经网络"},
+      {"src":"AI agent","dst":"AI 智能体"},
+      {"src":"agentic workflow","dst":"智能体工作流"},
+      {"src":"prompt engineering","dst":"提示词工程"},
+      {"src":"system prompt","dst":"系统提示词"},
+      {"src":"context window","dst":"上下文窗口"},
+      {"src":"fine-tuning","dst":"微调"},
+      {"src":"fine tuning","dst":"微调"},
+      {"src":"training data","dst":"训练数据"},
+      {"src":"inference","dst":"推理"},
+      {"src":"multimodal","dst":"多模态"},
+      {"src":"computer vision","dst":"计算机视觉"},
+      {"src":"speech recognition","dst":"语音识别"},
+      {"src":"text to speech","dst":"语音合成"},
+      {"src":"retrieval augmented generation","dst":"检索增强生成"},
+      {"src":"RAG","dst":"检索增强生成"},
+      {"src":"vector database","dst":"向量数据库"},
+      {"src":"embedding model","dst":"嵌入模型"},
+      {"src":"hallucination","dst":"幻觉"},
+      {"src":"reasoning model","dst":"推理模型"},
+      {"src":"open source model","dst":"开源模型"},
+      {"src":"model evaluation","dst":"模型评估"}
+    ]
+  }]
+}

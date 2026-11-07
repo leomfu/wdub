@@ -1,0 +1,5 @@
+# 中文 / 粤语识别（SenseVoice）额外依赖，约 1GB。
+# 只在 `bash tools/start-whisper.sh --sensevoice` 首次启用时安装。
+funasr==1.4.16
+modelscope==1.40.2
+kaldi-native-fbank==1.22.4
